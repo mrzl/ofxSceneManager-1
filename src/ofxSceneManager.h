@@ -64,6 +64,7 @@ public:
     void _windowResized(ofResizeEventArgs & args);
     void _dragEvent(ofDragInfo & dragInfo);
     void _gotMessage(ofMessage & msg);
+	void _touchDown( ofTouchEventArgs &touchEvent );
 };
 
 #endif /* defined(__KokiNomura__ofxSceneManager__) */

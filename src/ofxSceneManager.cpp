@@ -36,6 +36,7 @@ void ofxSceneManager::run() {
     ofAddListener(ofEvents().windowResized, this, &ofxSceneManager::_windowResized);
     ofAddListener(ofEvents().fileDragEvent, this, &ofxSceneManager::_dragEvent);
     ofAddListener(ofEvents().messageEvent, this, &ofxSceneManager::_gotMessage);
+	ofAddListener( ofEvents().touchDown, this, &ofxSceneManager::_touchDown );
 }
 
 void ofxSceneManager::update() {
@@ -190,4 +191,8 @@ void ofxSceneManager::_dragEvent(ofDragInfo &dragInfo) {
 
 void ofxSceneManager::_gotMessage(ofMessage &msg) {
     _currentScene->gotMessage(msg);
+}
+
+void ofxSceneManager::_touchDown( ofTouchEventArgs & touch ) {
+	_currentScene->touchDown( touch );
 }

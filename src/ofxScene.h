@@ -109,6 +109,7 @@ public:
     virtual void windowResized(int w, int h) {}
     virtual void dragEvent(ofDragInfo dragInfo) {}
     virtual void gotMessage(ofMessage msg) {}
+	virtual void touchDown( ofTouchEventArgs event ) {};
     
 #pragma mark - Custom Events
     ofEvent<bool> startFadingInEvent;  // The arg is currently not used.

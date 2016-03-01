@@ -194,5 +194,5 @@ void ofxSceneManager::_gotMessage(ofMessage &msg) {
 }
 
 void ofxSceneManager::_touchDown( ofTouchEventArgs & touch ) {
-	_currentScene->touchDown( touch );
+	_currentScene->touchDown();
 }

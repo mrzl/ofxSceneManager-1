@@ -27,6 +27,8 @@ public:
     void changeScene(int sceneIndex);
 
     void addScene(ofPtr<ofxScene> pScene);
+    
+    ofPtr<ofxScene> getCurrentScene();
 
     void setExitByTime(bool b);
     void setSceneDuration(float fadeInSec, float fadeOutSec);

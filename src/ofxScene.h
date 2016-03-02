@@ -118,6 +118,7 @@ public:
     ofEvent<bool> startFadingOutEvent;
     ofEvent<bool> finishSceneEvent;
 
+    std::string name;
 private:
     bool _bExitByTime = false;
     enum {FADINGIN, DRAWING, FADINGOUT, FINISHED} _status = FINISHED;

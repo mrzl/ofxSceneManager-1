@@ -104,6 +104,11 @@ void ofxSceneManager::addScene(ofPtr<ofxScene> pScene) {
     scenes.push_back(pScene);
 }
 
+ofPtr< ofxScene > ofxSceneManager::getCurrentScene()
+{
+    return _currentScene;
+}
+
 void ofxSceneManager::setExitByTime(bool b) {
     for (int i=0; i<scenes.size(); i++) {
         scenes.at(i)->setExitByTime(b);

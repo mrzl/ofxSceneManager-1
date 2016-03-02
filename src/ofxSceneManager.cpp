@@ -10,8 +10,14 @@
 #include "ofxSceneManager.h"
 
 void ofxSceneManager::run() {
-    _fbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    _nextFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    ofFbo::Settings settings;
+    settings.width = ofGetWidth();
+    settings.height = ofGetHeight();
+    settings.useDepth = false;
+    settings.useStencil = false;
+    settings.internalformat = GL_RGBA;
+    _fbo.allocate(settings);
+    _nextFbo.allocate(settings);
     
     _fbo.begin();
     ofClear(255, 255, 255, 0);
@@ -36,7 +42,7 @@ void ofxSceneManager::run() {
     ofAddListener(ofEvents().windowResized, this, &ofxSceneManager::_windowResized);
     ofAddListener(ofEvents().fileDragEvent, this, &ofxSceneManager::_dragEvent);
     ofAddListener(ofEvents().messageEvent, this, &ofxSceneManager::_gotMessage);
-	ofAddListener( ofEvents().touchDown, this, &ofxSceneManager::_touchDown );
+	ofAddListener(ofEvents().touchDown, this, &ofxSceneManager::_touchDown );
 }
 
 void ofxSceneManager::update() {
@@ -52,20 +58,27 @@ void ofxSceneManager::draw() {
         _nextScene->drawScene();
         _nextFbo.end();
     }
-
-    _fbo.begin();
-    _currentScene->drawScene();
-    _fbo.end();
     
-    ofPushStyle();
-    ofSetColor(255, 255, 255, _currentScene->getSceneAlpha());
-    _fbo.draw(0, 0);
-    ofPopStyle();
+    glEnable( GL_BLEND );
+    glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR );
 
+    _currentScene->drawScene();
+    
+    ofNoFill();
+    ofSetColor(255, _currentScene->getSceneAlpha());
+    ofDrawRectangle(0, -2, ofGetWidth() + 4, ofGetHeight() + 4);
+    
+    
     if (transition == TRANSITION_DISSOLVE && _isInTransition) {
         ofPushStyle();
+        //ofSetColor(255, 255, 255, _nextScene->getSceneAlpha());
+        
+        
+        _nextFbo.draw(0, 0, ofGetWidth(), ofGetHeight() );
         ofSetColor(255, 255, 255, _nextScene->getSceneAlpha());
-        _nextFbo.draw(0, 0);
+        ofDrawRectangle(0, -2, ofGetWidth() + 4, ofGetHeight() + 4);
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+        glDisable( GL_BLEND );
         ofPopStyle();
     }
 }

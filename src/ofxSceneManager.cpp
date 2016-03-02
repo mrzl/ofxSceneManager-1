@@ -57,10 +57,7 @@ void ofxSceneManager::draw() {
         _nextFbo.begin();
         _nextScene->drawScene();
         _nextFbo.end();
-    }
-    
-    glEnable( GL_BLEND );
-    glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR );
+    }	
 
     _currentScene->drawScene();
     
@@ -75,10 +72,8 @@ void ofxSceneManager::draw() {
         
         
         _nextFbo.draw(0, 0, ofGetWidth(), ofGetHeight() );
-        ofSetColor(255, 255, 255, _nextScene->getSceneAlpha());
+        ofSetColor(255, _nextScene->getSceneAlpha());
         ofDrawRectangle(0, -2, ofGetWidth() + 4, ofGetHeight() + 4);
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
-        glDisable( GL_BLEND );
         ofPopStyle();
     }
 }

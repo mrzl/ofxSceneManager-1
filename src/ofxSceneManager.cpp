@@ -63,7 +63,7 @@ void ofxSceneManager::draw() {
     
     ofNoFill();
     ofSetColor(255, _currentScene->getSceneAlpha());
-    ofDrawRectangle(0, -2, ofGetWidth() + 4, ofGetHeight() + 4);
+    ofDrawRectangle(-2, -2, ofGetWidth() + 4, ofGetHeight() + 4);
     
     
     if (transition == TRANSITION_DISSOLVE && _isInTransition) {
@@ -73,7 +73,7 @@ void ofxSceneManager::draw() {
         
         _nextFbo.draw(0, 0, ofGetWidth(), ofGetHeight() );
         ofSetColor(255, _nextScene->getSceneAlpha());
-        ofDrawRectangle(0, -2, ofGetWidth() + 4, ofGetHeight() + 4);
+        ofDrawRectangle(-2, -2, ofGetWidth() + 4, ofGetHeight() + 4);
         ofPopStyle();
     }
 }

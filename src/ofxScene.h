@@ -14,7 +14,7 @@
 class ofxScene {
 public:
 
-#pragma mark - Basics
+//#pragma mark - Basics
     void setupScene(ofPtr<ofxScene> previousScene) {
         setup();
         if (!_isSetupOverridden) {
@@ -49,7 +49,7 @@ public:
         startFadingOut();
     }
     
-#pragma mark - Status
+//#pragma mark - Status
     bool isFadingIn() {
         return _status == FADINGIN;
     }
@@ -66,7 +66,7 @@ public:
         return _status == FINISHED;
     }
     
-#pragma mark - Duration
+//#pragma mark - Duration
     void setSceneDuration(float fadeInSec, float fadeOutSec) {
         _fadeInSec = fadeInSec;
         _fadeOutSec = fadeOutSec;
@@ -90,7 +90,7 @@ public:
         return _fadeOutSec;
     }
     
-#pragma mark - Etc
+//#pragma mark - Etc
     void setExitByTime(bool b) {
         _bExitByTime = b;
     }
@@ -99,7 +99,7 @@ public:
         return _alphaTween.getTarget(0);
     }
     
-#pragma mark - Events
+//#pragma mark - Events
     virtual void keyPressed(int key) {}
     virtual void keyReleased(int key) {}
     virtual void mouseMoved(int x, int y) {}
@@ -111,7 +111,7 @@ public:
     virtual void gotMessage(ofMessage msg) {}
 	virtual void touchDown( ) {}
     
-#pragma mark - Custom Events
+//#pragma mark - Custom Events
     ofEvent<bool> startFadingInEvent;  // The arg is currently not used.
     ofEvent<bool> startDrawingEvent;
     ofEvent<bool> finishedDrawingEvent;    
@@ -133,7 +133,7 @@ private:
     
     bool _isSetupOverridden = true;  // a bit hacky...
     
-#pragma mark - To be overridden
+//#pragma mark - To be overridden
     virtual void setup() {_isSetupOverridden = false;}  // a bit hacky...
     virtual void setup(ofPtr<ofxScene> previousScene) {}
     virtual void update() {}
@@ -144,7 +144,7 @@ private:
     virtual void willFadeOut() {}
     virtual void willExit() {}
     
-#pragma mark - Start/finish
+//#pragma mark - Start/finish
     void startFadingIn() {
         if (_status == FADINGIN) {
             return;
@@ -196,7 +196,7 @@ private:
         ofNotifyEvent(finishSceneEvent, b, this);
     }
     
-#pragma mark - Status
+//#pragma mark - Status
     bool finishedFadeIn() {
         return _status == FADINGIN && _statusEndTime < ofGetElapsedTimef();
     }

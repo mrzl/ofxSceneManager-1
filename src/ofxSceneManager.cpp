@@ -130,7 +130,7 @@ void ofxSceneManager::setTransitionFade() {
     transition = TRANSITION_FADE;
 }
 
-#pragma mark - Private Methods
+//#pragma mark - Private Methods
 
 void ofxSceneManager::_onStartFadingIn(bool &b) {
 
@@ -169,7 +169,7 @@ void ofxSceneManager::_onFinishScene(bool &b) {
     }
 }
 
-#pragma mark - Events
+//#pragma mark - Events
 void ofxSceneManager::_keyPressed(ofKeyEventArgs &args) {
     _currentScene->keyPressed(args.key);
 }

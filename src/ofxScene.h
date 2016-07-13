@@ -26,7 +26,7 @@ class ofxScene{
 	public:
 
 		ofxScene(){ };
-		virtual ~ofxScene() { }
+		virtual ~ofxScene() { }	
 
 		virtual void setup(){};
 

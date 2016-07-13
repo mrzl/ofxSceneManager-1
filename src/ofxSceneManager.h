@@ -31,7 +31,8 @@ class ofxSceneManager{
 	
 		void addScene( ofxScene* newScene, int sceneID );
 		
-		bool goToScene( int sceneID, bool regardless = false, bool doTransition = true );
+		bool goToScene( int sceneID, bool regardless = false, bool doTransition = false );
+		bool nextScene( bool regardless = false, bool doTransition = false );
 
 		bool isTransitioning(){ return !curtain.isReady(); }
 
@@ -81,6 +82,7 @@ class ofxSceneManager{
 			
 		ofxScene*					currentScene;
 		ofxScene*					futureScene;
+		ofxScene*					lastScene;
 	
 		bool						overlapUpdate; // if true, we will update both scenes when transitioning 
 		bool 						drawDebugInfo;

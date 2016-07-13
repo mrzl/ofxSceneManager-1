@@ -14,7 +14,7 @@ ofxSceneManager* ofxSceneManager::singleton = NULL;
 
 ofxSceneManager::ofxSceneManager(){
 
-	currentScene = futureScene = NULL;
+	currentScene = futureScene = lastScene = NULL;
 	curtainDropTime = 0.5f;
 	curtainStayTime = 0.0f;
 	curtainRiseTime = 0.5f;
@@ -23,7 +23,6 @@ ofxSceneManager::ofxSceneManager(){
 	curtain.setAnimationCurve(EASE_IN_EASE_OUT);
 }
 
-
 ofxSceneManager* ofxSceneManager::instance(){
 	if (!singleton){   // Only allow one instance of class to be generated.
 		singleton = new ofxSceneManager();
@@ -31,9 +30,8 @@ ofxSceneManager* ofxSceneManager::instance(){
 	return singleton;
 }
 
-
-ofxSceneManager::~ofxSceneManager(){}
-
+ofxSceneManager::~ofxSceneManager(){
+}
 
 void ofxSceneManager::addScene( ofxScene* newScene, int sceneID ){
 
@@ -72,9 +70,8 @@ void ofxSceneManager::update( float dt ){
 			currentScene->sceneDidAppear();
 		}
 	}else{
-		futureScene = NULL;			
+		futureScene = NULL;	
 	}
-
 	
 	if (currentScene != NULL){
 						
@@ -83,6 +80,9 @@ void ofxSceneManager::update( float dt ){
 		if (overlapUpdate){
 			if (futureScene != NULL){
 				screensToUpdate.push_back(futureScene);
+			}
+			if( lastScene != NULL ) {
+				screensToUpdate.push_back( lastScene );
 			}
 		}
 		
@@ -100,6 +100,12 @@ void ofxSceneManager::draw(){
 		
 		vector <ofxScene*> scenesToDraw;
 		scenesToDraw.push_back(currentScene);
+		if( futureScene != NULL ) {
+			scenesToDraw.push_back( futureScene );
+		}
+		if( lastScene != NULL ) {
+			scenesToDraw.push_back( lastScene );
+		}
 		
 		for (int i = 0; i < scenesToDraw.size(); i++){
 			ofxScene * s = scenesToDraw[i];
@@ -113,7 +119,6 @@ void ofxSceneManager::draw(){
 		if ( !curtain.isReady() ){
 			curtain.draw();
 		}
-		//curtain.drawDebug();
 	}
 	
 	if (drawDebugInfo){
@@ -166,6 +171,7 @@ bool ofxSceneManager::goToScene( int ID, bool regardless, bool doTransition){
 				if (currentScene) currentScene->sceneDidDisappear(futureScene);
 				next->sceneDidAppear();
 				//hot-swap current scenes
+				lastScene = currentScene;
 				currentScene = next;
 				futureScene = NULL;
 				return true;
@@ -184,7 +190,12 @@ bool ofxSceneManager::goToScene( int ID, bool regardless, bool doTransition){
 }
 
 
-void ofxSceneManager::updateHistory( ofxScene * s ){
+bool ofxSceneManager::nextScene( bool regardless /*= false*/, bool doTransition /*= true */ )
+{
+	return goToScene( ( currentScene->getSceneID() + 1 ) % scenes.size(), regardless, doTransition );
+}
+
+void ofxSceneManager::updateHistory( ofxScene * s ) {
 	
 	history.push_back(s);
 	if (history.size() > MAX_HISTORY_NR){

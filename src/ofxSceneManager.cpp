@@ -185,7 +185,7 @@ bool ofxSceneManager::goToScene( int ID, bool regardless, bool doTransition){
 void ofxSceneManager::updateHistory( ofxScene * s ){
 	
 	history.push_back(s);
-	if (history.size() > MAX_HISTORY){
+	if (history.size() > MAX_HISTORY_NR){
 		history.erase(history.begin());
 	}	
 }
@@ -296,5 +296,3 @@ void ofxSceneManager::touchCancelled(ofTouchEventArgs &touch){
 	if (currentScene != NULL) currentScene->touchCancelled( touch );
 }
 #endif
-
-

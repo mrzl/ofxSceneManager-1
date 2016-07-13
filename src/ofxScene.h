@@ -8,9 +8,9 @@
  */
 
 /**
- 
+
  Mainly an abstract class, to define a protocol for custom "ofxScene" subclasses
- 
+
  **/
 
 #ifndef ofxScene_h
@@ -25,11 +25,11 @@ class ofxScene{
 
 	public:
 
-		ofxScene(){ printf("ofxScene Constructor \n"); };	
+		ofxScene(){ printf("ofxScene Constructor \n"); };
 		virtual ~ofxScene() { printf("ofxScene Destructor :: %d\n", sceneID); }
 
 		virtual void setup(){ printf("ofxScene setup :: %d\n", sceneID); };
-		
+
 		virtual void update(float){} ;
 		virtual void draw(){};
 
@@ -44,7 +44,7 @@ class ofxScene{
 		virtual void sceneDidAppear() { printf("ofxScene::sceneDidAppear() :: %d\n", sceneID); };
 		virtual void sceneWillDisappear( ofxScene * toScreen) { printf("ofxScene::sceneWillDisappear() :: %d\n", sceneID); };
 		virtual void sceneDidDisappear( ofxScene * fromScreen ) { printf("ofxScene::sceneDidDisappear() :: %d\n", sceneID); };
-	
+
 		//events - desktop
 		virtual void keyPressed(int key) {} ;
 		virtual void keyReleased(int key) {};
@@ -62,10 +62,10 @@ class ofxScene{
 		virtual void touchDoubleTap(ofTouchEventArgs &touch){};
 		virtual void touchCancelled(ofTouchEventArgs &touch){};
 		#endif
-	
+
 		//visual debug
 		virtual void drawDebug(){ ofDrawBitmapString( "I am Scene: " + ofToString(sceneID), ofGetWidth() - 200, 20); }
-	
+
 		int getSceneID(){ return sceneID;}
 		ofxSceneManager * getManager(){ return manager;}
 	private:
@@ -73,10 +73,9 @@ class ofxScene{
 		friend class ofxSceneManager;
 		void setSceneID( int s ){ sceneID = s; }
 		void setManager( ofxSceneManager *sm ){ manager = sm; }
-	
+
 		int sceneID;
 		ofxSceneManager * manager;
 };
 
 #endif
-

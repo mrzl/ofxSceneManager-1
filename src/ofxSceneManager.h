@@ -9,7 +9,7 @@
 #ifndef ofxSceneManager_h
 #define ofxSceneManager_h
 
-#define MAX_HISTORY	10
+#define MAX_HISTORY_NR	10
 #define NULL_SCENE -1
 
 #include "ofMain.h"

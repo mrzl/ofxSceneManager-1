@@ -296,5 +296,3 @@ void ofxSceneManager::touchCancelled(ofTouchEventArgs &touch){
 	if (currentScene != NULL) currentScene->touchCancelled( touch );
 }
 #endif
-
-

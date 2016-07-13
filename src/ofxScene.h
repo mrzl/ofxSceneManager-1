@@ -25,10 +25,10 @@ class ofxScene{
 
 	public:
 
-		ofxScene(){ printf("ofxScene Constructor \n"); };
-		virtual ~ofxScene() { printf("ofxScene Destructor :: %d\n", sceneID); }
+		ofxScene(){ };
+		virtual ~ofxScene() { }
 
-		virtual void setup(){ printf("ofxScene setup :: %d\n", sceneID); };
+		virtual void setup(){};
 
 		virtual void update(float){} ;
 		virtual void draw(){};
@@ -40,10 +40,10 @@ class ofxScene{
 		virtual void resumeScene(){}
 
 		//notifications
-		virtual void sceneWillAppear( ofxScene * fromScreen ) { printf("ofxScene::sceneWillAppear() :: %d\n", sceneID); };
-		virtual void sceneDidAppear() { printf("ofxScene::sceneDidAppear() :: %d\n", sceneID); };
-		virtual void sceneWillDisappear( ofxScene * toScreen) { printf("ofxScene::sceneWillDisappear() :: %d\n", sceneID); };
-		virtual void sceneDidDisappear( ofxScene * fromScreen ) { printf("ofxScene::sceneDidDisappear() :: %d\n", sceneID); };
+		virtual void sceneWillAppear( ofxScene * fromScreen ) {};
+		virtual void sceneDidAppear() { };
+		virtual void sceneWillDisappear( ofxScene * toScreen) {  };
+		virtual void sceneDidDisappear( ofxScene * fromScreen ) { };
 
 		//events - desktop
 		virtual void keyPressed(int key) {} ;

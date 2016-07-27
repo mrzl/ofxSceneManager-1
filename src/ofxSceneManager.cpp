@@ -44,7 +44,7 @@ void ofxSceneManager::addScene( ofxScene* newScene, int sceneID ){
 		newScene->setup();
 		newScene->setSceneID( sceneID );
 		scenes[sceneID] = newScene;
-		ofLogNotice( "ofxSceneManager::addScene(" + ofToString( sceneID ) + ") >> added scene");
+		//ofLogNotice( "ofxSceneManager::addScene(" + ofToString( sceneID ) + ") >> added scene");
 		if (scenes.size() == 1){	//first scene, we activate it			
 			goToScene( sceneID, true/*regardless*/, false/*transition*/ ); 
 			currentScene = getScene( sceneID );
